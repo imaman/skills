@@ -1,6 +1,6 @@
 ---
 name: jsdoc-writer
-description: Add JSDoc to code entities. TRIGGER when: user asks to add/write/improve JSDoc (e.g., "add jsdoc to Foo", "jsdoc for Bar").
+description: 'Add JSDoc to code entities. TRIGGER when: user asks to add/write/improve JSDoc (e.g., "add jsdoc to Foo", "jsdoc for Bar").'
 ---
 
 Add precise yet tight JSDoc for the entities specified by the user. Avoid slop. Make it the JSDoc that engineers will love to read, not the JSDoc that PMs will love to show off.
