@@ -1,6 +1,6 @@
 ---
 name: regression-dog
-description: Review code changes for regressions.
+description: Review code for regressions. TRIGGER when: reviewing changes, checking for breakage, or auditing commits (e.g., "did I break anything", "review last commit").
 
 ---
 
