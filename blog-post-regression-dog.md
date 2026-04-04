@@ -18,13 +18,25 @@ It reads the diff of your branch (or last commit, or last N commits - you choose
 
 The whole prompt is meticulously crafted around keeping the LLM focused on a well-structured task. Every line is there for a reason:
 
-*"Enumerate behavioral differences: this used to do X, now it does Y."* — **Well-structured task.** The prompt doesn't say "review my code." It asks a specific, concrete question: what are all the behavioral changes in this diff? That's a question an LLM can answer precisely, without needing taste or project context.
+> Do NOT run tests, typechecks, linters, or build commands.
 
-*"Do NOT run tests, typechecks, linters, or build commands."* - **Focus.** This isn't just saving time - it's protecting the LLM's context budget so it spends all of it on reasoning about code, not on tool output.
+Protects the agent's context window so the underlying LLM can invest its reasoning where it matters.
 
-*"Do not judge whether the old or new behavior is correct - just surface the delta."* - **Both.** It's focus: don't spend tokens assessing whether changes are good or bad. And it's structure: every change becomes a factual observation to report, not a judgment call the LLM isn't equipped to make.
+> Enumerate behavioral differences: this used to do X, now it does Y.
 
-*"Add a Cleared section listing items that were reviewed and found to have no issues."* - **Keeping the reasoning straight.** This sounds cosmetic but it's load-bearing. When the skill inspects a code change, it now has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
+Lays out the the well structured task: what are all the behavioral changes in this diff? 
+
+> Do not judge whether the old or new behavior is correct - just surface the delta.
+
+Enforces the well-structuredness: do no apply taste or judgement calls. 
+
+> Do not flag pre-existing issues or suggest improvements
+
+Again, **Focus**: brutal token frugality.
+
+> Add a "Cleared" section listing items that were reviewed and found to have no issues.
+
+This sounds cosmetic but it's a crticial load-bearing. When the agents inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
 
 ## How I actually use it
 
