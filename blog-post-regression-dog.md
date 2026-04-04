@@ -16,15 +16,15 @@ It reads the diff of your branch (or last commit, or last N commits — you choo
 
 ## Why it works
 
-I think it comes down to asking a well-structured question. The prompt doesn't say "review my code." It asks something much more specific: *what are all the behavioral changes in this diff?* That's a question an LLM can answer precisely, without needing taste or project context.
+It's about two things: (i) keeping the LLM focused, and (ii) giving it a well-structured task. Every piece of the prompt serves one or the other.
 
-Three design choices keep it focused:
+*"Enumerate behavioral differences: this used to do X, now it does Y."* — **Well-structured task.** The prompt doesn't say "review my code." It asks a specific, concrete question: what are all the behavioral changes in this diff? That's a question an LLM can answer precisely, without needing taste or project context.
 
-1. **Don't run anything.** No tests, linters, or builds — CI handles that. Spend your entire context budget on reasoning about what changed.
-2. **Don't judge.** Don't decide whether old or new behavior is "better." Just surface the delta. This grounds the skill in *detection*, not *assessment*.
-3. **List what's cleared, too** — things you reviewed and found safe.
+*"Do NOT run tests, typechecks, linters, or build commands."* — **Focus.** This isn't just saving time — it's protecting the LLM's context budget so it spends all of it on reasoning about code, not on tool output.
 
-That third point sounds cosmetic but it's actually load-bearing. When the skill inspects a code change, it now has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
+*"Do not judge whether the old or new behavior is correct — just surface the delta."* — **Focus.** This keeps the skill in *detection* mode, not *assessment* mode. Assessment requires taste and project knowledge the LLM doesn't have. Detection is something it can do reliably.
+
+*"Add a Cleared section listing items that were reviewed and found to have no issues."* — **Well-structured task.** This sounds cosmetic but it's load-bearing. When the skill inspects a code change, it now has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
 
 ## How I actually use it
 
