@@ -24,19 +24,19 @@ Protects the agent's context window so the underlying LLM can invest its reasoni
 
 > Enumerate behavioral differences: this used to do X, now it does Y.
 
-Lays out the the well structured task: what are all the behavioral changes in this diff? 
+The prompt doesn't say "review my code." It poses a specific, concrete question: what are all the behavioral changes in this diff? That's a question an LLM can answer precisely, without needing taste or project context.
 
 > Do not judge whether the old or new behavior is correct - just surface the delta.
 
-Enforces the well-structuredness: do no apply taste or judgement calls. 
+Keeps the skill in detection mode, not assessment mode. Every change becomes a factual observation to report, not a judgment call the LLM isn't equipped to make.
 
 > Do not flag pre-existing issues or suggest improvements
 
-Again, **Focus**: brutal token frugality.
+Shuts down another distraction path. Without this, the LLM drifts into suggesting improvements to code that was already there before your branch.
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
-This sounds cosmetic but it's a crticial load-bearing. When the agents inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
+This sounds cosmetic but it's critical and load-bearing. When the agent inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
 
 ## How I actually use it
 
