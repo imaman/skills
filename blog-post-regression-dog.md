@@ -48,7 +48,7 @@ flag all regressions in this branch
 
 It comes back fast - often within a minute, depending on the scope, of course. Anyhow, even in more complex changes it is significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
 
-I expected it to be quick but shallow. I figured I'd run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice.
+Initially, I imaginged I'd run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice.
 
 Then I fix things in that same session. It already has rich context about the branch, so fixes are fast. I apply judgment - some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
