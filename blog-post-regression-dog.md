@@ -24,7 +24,7 @@ Protects the agent's context window so the underlying LLM can invest its reasoni
 
 > Enumerate behavioral differences: this used to do X, now it does Y.
 
-The prompt doesn't say "review my code." It poses a specific, concrete question: what are all the behavioral changes in this diff? That's a question an LLM can answer precisely, without needing taste or project context.
+The prompt doesn't say "review my code." It poses a specific, concrete question: what are all the behavioral changes in this diff? That's a question thay plays to the strenghtes of LLM.
 
 > Do not judge whether the old or new behavior is correct - just surface the delta.
 
