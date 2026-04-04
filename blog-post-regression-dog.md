@@ -16,7 +16,7 @@ It reads the diff of your branch (or last commit, or last N commits - you choose
 
 ## Why it works
 
-The whole prompt is meticulously crafted around keeping the LLM focused on a well-structured task. Every line is there for a reason:
+The whole prompt is meticulously crafted around keeping the LLM focused on a well-grounded task. Every line is there for a reason:
 
 > Do NOT run tests, typechecks, linters, or build commands.
 
@@ -24,15 +24,15 @@ Protects the agent's context window so the underlying LLM can invest its reasoni
 
 > Enumerate behavioral differences: this used to do X, now it does Y.
 
-The prompt doesn't say "review my code." It poses a specific, concrete question: what are all the behavioral changes in this diff? 
+It poses a specific, concrete question: what are all the behavioral changes in this diff? This is a grounded task as opposed to open-ended "review my code" prompts.
 
 > Do not judge whether the old or new behavior is correct - just surface the delta.
 
-Plays to the strengths of an LLM.
+Plays to the strengths of LLMs.
 
 > Do not flag pre-existing issues or suggest improvements
 
-Shuts down a distraction course. 
+Shuts down a distraction course agents are likely to pursue.
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
@@ -46,7 +46,7 @@ I work on something. When I think it's ready, I open a fresh Claude Code session
 flag all regressions in this branch
 ```
 
-It comes back fast - not instant, but significantly faster than the push-to-GitHub-wait-for-bot loop. And right there in my terminal, no tab-switching.
+It comes back fast - often within a minute, depending of course on the scope. Anyhow, even in more complex change it is significantly faster than the push-to-GitHub-wait-for-bot loop. And, it is right there in my terminal, no tab-switching.
 
 I expected it to be quick but shallow. I figured I'd run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice.
 
