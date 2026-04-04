@@ -14,13 +14,17 @@ Then I wrote a Claude Code skill called `regression-dog`. It's about 20 lines of
 
 It reads the diff of your branch (or last commit, or last N commits — you choose the scope) and lists every behavioral change it can find. That's it. No style nits, no "consider renaming this variable," no improvement suggestions. Just: "this used to do X, now it does Y."
 
-The prompt tells the LLM three things:
+## Why it works
 
-1. Don't run tests, linters, or builds. CI handles that. Spend your entire context budget on reasoning about what changed.
-2. Don't judge. Don't decide whether old or new behavior is "better." Just surface the delta.
-3. List what's cleared, too — things you reviewed and found safe.
+I think it comes down to asking a well-structured question. The prompt doesn't say "review my code." It asks something much more specific: *what are all the behavioral changes in this diff?* That's a question an LLM can answer precisely, without needing taste or project context.
 
-That third point sounds cosmetic but it's actually load-bearing. When the LLM inspects a code change, it now has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces the model to make an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
+Three design choices keep it focused:
+
+1. **Don't run anything.** No tests, linters, or builds — CI handles that. Spend your entire context budget on reasoning about what changed.
+2. **Don't judge.** Don't decide whether old or new behavior is "better." Just surface the delta. This grounds the skill in *detection*, not *assessment*.
+3. **List what's cleared, too** — things you reviewed and found safe.
+
+That third point sounds cosmetic but it's actually load-bearing. When the skill inspects a code change, it now has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
 
 ## How I actually use it
 
@@ -30,11 +34,11 @@ I work on something. When I think it's ready, I open a fresh Claude Code session
 flag all regressions in this branch
 ```
 
-It comes back in seconds. Right there in my terminal. No push, no wait, no tab-switching to GitHub.
+It comes back fast — not instant, but significantly faster than the push-to-GitHub-wait-for-bot loop. And right there in my terminal, no tab-switching.
+
+I expected it to be quick but shallow. I figured I'd run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice.
 
 Then I fix things in that same session. It already has rich context about the branch, so fixes are fast. I apply judgment — some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
-
-The whole loop is maybe two minutes. Compare that to push → wait for CI bot → read findings → go back to editor → push again.
 
 ## Why it works on non-refactoring PRs too
 
@@ -42,7 +46,7 @@ I originally built this for pure refactors where zero behavioral changes are exp
 
 But then I started running it on feature branches, bug fixes, everything. Turns out "enumerate what changed" is a useful frame even when changes are expected. It catches the *unintended* changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format — that kind of thing.
 
-The "don't judge" instruction is key here. A model that tries to assess whether each change is good or bad will get confused on feature branches where most changes *are* good. A model that just lists deltas gives you a clean inventory to scan with your own brain.
+The "don't judge" instruction is key here. When the skill tries to assess whether each change is good or bad, it gets confused on feature branches where most changes *are* good. But when it just lists deltas, it stays sharp — and the results are specific enough that scanning them takes seconds, not minutes.
 
 ## What it doesn't do
 
