@@ -1,13 +1,9 @@
 ---
-title: The Question Your Code Review Bot Should Be Asking
+title: I built a 21-line skill for Claude Code that distrupted my workflow.
 published: false
 tags: ai, agents, coding, codereview
 ---
 
-I stopped using code review bots. Greptile, Cursor BugBot — I gave them all a fair shot.They'd flag style nits, speculate about potential bugs, and occasionally hallucinate issues in code that was perfectly fine. The signal-to-noiseratio never got good enough to change my behavior.
-
-Then I built a 21-line skill for Claude Code that actually did.
-        
 ## What it does
 
 [regression-dog](https://github.com/imaman/skills) doesn't review code. It detects behavioral deltas. The entire prompt boils down to: *look at the code before, look at the code after, enumerate everything that changed in behavior.* Not "find bugs." Not "suggest improvements." Just: what used to do X that now does Y?
