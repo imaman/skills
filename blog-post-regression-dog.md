@@ -32,7 +32,7 @@ Keeps the skill in detection mode, not assessment mode. Every change becomes a f
 
 > Do not flag pre-existing issues or suggest improvements
 
-Shuts down another distraction path. Without this, the LLM drifts into suggesting improvements to code that was already there before your branch.
+Shuts down a distraction course. 
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
