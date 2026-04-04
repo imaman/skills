@@ -4,10 +4,10 @@ published: false
 tags: ai, agents, coding, codereview
 ---
 
-I've used code review bots — Greptile, Cursor BugBot — and they're genuinely good. They catch real issues and keep getting better. But I found myself not acting on their output as much as I expected. Part of it was workflow friction: they live on GitHub, and I live in my terminal. Switching context to read PR comments broke my flow. Part of it was framing: they answer "what's wrong with this code?" which is broad enough that the signal gets diluted.
+I stopped using code review bots. Greptile, Cursor BugBot — I gave them all a fair shot.They'd flag style nits, speculate about potential bugs, and occasionally hallucinate issues in code that was perfectly fine. The signal-to-noiseratio never got good enough to change my behavior.
 
-Then I built a 21-line skill for Claude Code that addressed both problems at once.
-
+Then I built a 21-line skill for Claude Code that actually did.
+        
 ## What it does
 
 [regression-dog](https://github.com/imaman/skills) doesn't review code. It detects behavioral deltas. The entire prompt boils down to: *look at the code before, look at the code after, enumerate everything that changed in behavior.* Not "find bugs." Not "suggest improvements." Just: what used to do X that now does Y?
