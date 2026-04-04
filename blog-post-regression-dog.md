@@ -46,7 +46,7 @@ I work on something. When I think it's ready, I open a fresh Claude Code session
 flag all regressions in this branch
 ```
 
-It comes back fast - often within a minute, depending of course on the scope. Anyhow, even in more complex change it is significantly faster than the push-to-GitHub-wait-for-bot loop. And, it is right there in my terminal, no tab-switching.
+It comes back fast - often within a minute, depending on the scope, of course. Anyhow, even in more complex changes it is significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
 
 I expected it to be quick but shallow. I figured I'd run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice.
 
