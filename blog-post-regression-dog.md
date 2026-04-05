@@ -8,11 +8,15 @@ I stopped waiting for Greptile and co.
 
 Instead I run a skill I call `regression-dog`. It is open source, simple (about 20 lines of markdown), and integrates right into my terminal/coding agent.
 
-Initially, I imagined I'd use it to run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice. Here is everything you need to know.
+Initially, I imagined I'd use it to run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better.
 
 ## What it does
 
-It reads the diff of your branch (or last commit, or last N commits - you choose the scope) and lists every behavioral change it can find. A typical output looks like this:
+It reads the diff of your branch (or last commit, or last N commits - you choose the scope) and lists every behavioral change it can find. Not style nits, not "consider renaming this variable" — just behavioral deltas. This used to do X, now it does Y.
+
+The output is split into two sections. First, numbered regressions with severity ratings — things like "the retry loop now exits after 3 attempts instead of 5" or "the error response no longer includes the request ID." Then a "Cleared" section listing every change it reviewed and found safe. That second section matters more than it sounds — I'll explain why below.
+
+A typical output looks like this:
 
 [screenshot goes here]
 
