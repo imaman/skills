@@ -16,6 +16,8 @@ Start a fresh Claude Code session and ask it to review your changes:
 /regression-dog HEAD~3
 ```
 
+Or, in plain English:
+
 ```
 flag all regressions in this branch
 ```
