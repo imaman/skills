@@ -30,15 +30,15 @@ Protects the agent's context window so the underlying LLM can invest its reasoni
 
 > Enumerate behavioral differences: this used to do X, now it does Y.
 
-It poses a specific, concrete question: what are all the behavioral changes in this diff? This is a grounded task as opposed to open-ended "review my code" prompts.
+It poses a specific, concrete question: what are all the behavioral changes in this diff? This is a grounded task, unlike open-ended "review my code" prompts.
 
 > Do not judge whether the old or new behavior is correct - just surface the delta.
 
-Plays to the strengths of LLMs.
+Structured analysis of code is an LLM's happy place. Judging intent isn't. This keeps them where they're strongest.
 
 > Do not flag pre-existing issues or suggest improvements
 
-Shuts down a distraction course agents love pursuing.
+Shuts down a rabbit hole agents love going down.
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
@@ -46,15 +46,17 @@ This sounds cosmetic but it's critical and load-bearing. When the agent inspects
 
 ## How I actually use it
 
-I work on something. When I think it's ready, I open a fresh Claude Code session - fresh, so the review isn't biased by the conversation that produced the code - and type something like:
+I work on something. When I think it's ready, I open a fresh Claude Code session and type something like:
 
 ```
 flag all regressions in this branch
 ```
 
-It comes back fast - often within a minute, depending on the scope, of course. Anyhow, even in more complex changes it is significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
+A fresh session matters — it keeps the review unbiased by the conversation that produced the code.
 
-Then I fix things in that same session. It is already loaded with high quality context about the branch, so fixes are fast. I apply judgment - some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
+It comes back fast - often within a minute, depending on the scope, of course. Even in more complex changes it is significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
+
+Then I fix things in that same session. It is already loaded with high quality context about the branch, so fixes are fast. Some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
 This works just as well on feature branches as on pure refactors. Turns out "enumerate what changed" is a useful frame even when changes are expected - it catches the unintended changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format - that kind of thing.
 
