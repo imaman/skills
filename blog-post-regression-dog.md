@@ -1,5 +1,5 @@
 ---
-title: A 20-line skill that replaced my code review safety net
+title: 20 lines of markdown replaced my code review bot
 published: false
 tags: claudecode, ai, codereview, devtools
 ---
