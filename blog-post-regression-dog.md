@@ -34,7 +34,7 @@ It poses a specific, concrete question: what are all the behavioral changes in t
 
 > Do not judge whether the old or new behavior is correct - just surface the delta.
 
-Analyzing code is an LLM's happy place. Judging intent isn't. This keeps it where it's strongest.
+Picking apart code is an LLM's happy place. Judging intent isn't. This keeps it where it's strongest.
 
 > Do not flag pre-existing issues or suggest improvements
 
@@ -42,7 +42,7 @@ Shuts down a rabbit hole agents love going down.
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
-This sounds cosmetic but it's more important than it looks. When the agent inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
+This sounds cosmetic but it's load-bearing. When the agent inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
 
 ## How I actually use it
 
