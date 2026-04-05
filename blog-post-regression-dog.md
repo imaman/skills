@@ -18,7 +18,7 @@ The output is split into two sections. First, numbered regressions with severity
 
 A typical output looks like this:
 
-[screenshot goes here]
+![Typical output of regression-dog](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ycco56eb4oy8ouxgur0z.png)
 
 ## Let's unpack the magic
 
@@ -61,42 +61,12 @@ Then I fix things in that same session. It's already loaded with high quality co
 This works just as well on feature branches as on pure refactors. Turns out "enumerate what changed" is a useful lens even when you expect changes - it catches the unintended changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format - that kind of thing.
 
 
-## The full skill
-
-Here's the entire prompt - this is all there is:
-
-```markdown
-Review code changes for behavioral differences between the before and after code.
-
-Important:
-- Do NOT run tests, typechecks, linters, or build commands.
-  CI already handles those. Focus your context budget entirely on
-  reasoning about the code changes and their implications on
-  logic/behavior/data/etc.
-- Enumerate behavioral differences: "this used to do X, now it does Y."
-  Do not judge whether the old or new behavior is correct — just
-  surface the delta. Do not flag pre-existing issues or suggest
-  improvements.
-
-Output format:
-- List regressions first, numbered, with severity.
-- After the regressions section, add a "Cleared" section listing items
-  that were reviewed and found to have no issues.
-  Prefix each cleared item with a ✅ emoji.
-
-Scope (pass as arguments):
-- No arguments: review the most recent commit
-- `main`: review all commits since the last merge from main
-- `HEAD~3`: review the last 3 commits
-- Any git revision range (e.g., `abc123..HEAD`, `main..HEAD`)
-```
-
 ## Install it
+
+It's on [GitHub](https://github.com/imaman/skills). To install:
 
 ```bash
 npx skills add https://github.com/imaman/skills --skill regression-dog
 ```
 
 After installing, open a Claude Code session in your repo and ask it to review your branch for regressions. It'll pick up the skill automatically.
-
-There are a couple more skills in [the same repo](https://github.com/imaman/skills) if you want to browse around.
