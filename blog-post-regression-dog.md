@@ -6,9 +6,9 @@ tags: claudecode, ai, codereview, devtools
 
 I stopped waiting for Greptile and co.
 
-Instead I run a skill I call `regression-dog`. It is open source, simple (about 20 lines of markdown), and integrates right into my terminal/coding agent.
+Instead I run a skill I call `regression-dog`. It's open source, simple (about 20 lines of markdown), and integrates right into my terminal/coding agent.
 
-Initially, I imagined I'd use it to run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better.
+Initially, I imagined I'd do a few quick passes locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better.
 
 ## What it does
 
@@ -22,7 +22,7 @@ A typical output looks like this:
 
 ## Let's unpack the magic
 
-The whole prompt is meticulously crafted around keeping the LLM focused on a well-grounded task. Every line is there for a reason:
+The whole prompt is meticulously crafted to keep the LLM focused on a well-grounded task. Every line is there for a reason:
 
 > Do NOT run tests, typechecks, linters, or build commands.
 
@@ -34,7 +34,7 @@ It poses a specific, concrete question: what are all the behavioral changes in t
 
 > Do not judge whether the old or new behavior is correct - just surface the delta.
 
-Structured analysis of code is an LLM's happy place. Judging intent isn't. This keeps them where they're strongest.
+Analyzing code is an LLM's happy place. Judging intent isn't. This keeps it where it's strongest.
 
 > Do not flag pre-existing issues or suggest improvements
 
@@ -42,7 +42,7 @@ Shuts down a rabbit hole agents love going down.
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
-This sounds cosmetic but it's critical and load-bearing. When the agent inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
+This sounds cosmetic but it's more important than it looks. When the agent inspects a code change, it has two outlets: either the change is safe (goes to "Cleared") or it's a behavioral difference (goes to "Regressions"). This symmetry forces an explicit decision on every change instead of quietly skipping things it's unsure about. It improved recall noticeably when I added it.
 
 ## How I actually use it
 
@@ -54,11 +54,11 @@ flag all regressions in this branch
 
 A fresh session matters — it keeps the review unbiased by the conversation that produced the code.
 
-It comes back fast - often within a minute, depending on the scope, of course. Even in more complex changes it is significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
+It comes back fast - often under a minute, depending on scope. Even with bigger changes it's significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
 
-Then I fix things in that same session. It is already loaded with high quality context about the branch, so fixes are fast. Some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
+Then I fix things in that same session. It's already loaded with high quality context about the branch, so fixes are fast. Some "regressions" are intentional, so I just move on. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
-This works just as well on feature branches as on pure refactors. Turns out "enumerate what changed" is a useful frame even when changes are expected - it catches the unintended changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format - that kind of thing.
+This works just as well on feature branches as on pure refactors. Turns out "enumerate what changed" is a useful lens even when you expect changes - it catches the unintended changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format - that kind of thing.
 
 
 ## The full skill
@@ -71,7 +71,7 @@ Review code changes for behavioral differences between the before and after code
 Important:
 - Do NOT run tests, typechecks, linters, or build commands.
   CI already handles those. Focus your context budget entirely on
-  reasoning about the code changes and its implications on
+  reasoning about the code changes and their implications on
   logic/behavior/data/etc.
 - Enumerate behavioral differences: "this used to do X, now it does Y."
   Do not judge whether the old or new behavior is correct — just
