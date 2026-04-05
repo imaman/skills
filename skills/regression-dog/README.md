@@ -13,28 +13,14 @@ npx skills add https://github.com/imaman/skills --skill regression-dog
 Start a fresh Claude Code session and ask it to review your changes:
 
 ```
-/regression-dog main
+/regression-dog HEAD~3
 ```
 
-Reviews everything on your branch since it diverged from main.
-
 ```
-/regression-dog
+flag all regressions in this branch
 ```
 
-Reviews the most recent commit.
-
-```
-/regression-dog HEAD~5
-```
-
-Reviews the last five commits.
-
-```
-/regression-dog abc123..def456
-```
-
-Reviews an arbitrary commit range.
+The skill also triggers from natural-language prompts about reviewing changes or checking for breakage, so the slash command is not the only way in.
 
 ## What you get
 
