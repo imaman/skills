@@ -12,9 +12,14 @@ Then I wrote a Claude Code skill called `regression-dog`. It's about 20 lines of
 
 ## What it does
 
-It reads the diff of your branch (or last commit, or last N commits - you choose the scope) and lists every behavioral change it can find. That's it. No style nits, no "consider renaming this variable," no improvement suggestions. Just: "this used to do X, now it does Y."
+It reads the diff of your branch (or last commit, or last N commits - you choose the scope) and lists every behavioral change it can find. Here's how a typical output look like
 
-## Why it works
+[screenshot goes here]
+
+
+Initially, I imagined I'd use it to run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice. Here is why it works.
+
+## Let's unpack the magic
 
 The whole prompt is meticulously crafted around keeping the LLM focused on a well-grounded task. Every line is there for a reason:
 
@@ -32,7 +37,7 @@ Plays to the strengths of LLMs.
 
 > Do not flag pre-existing issues or suggest improvements
 
-Shuts down a distraction course agents are likely to pursue.
+Shuts down a distraction course agents love pursuing.
 
 > Add a "Cleared" section listing items that were reviewed and found to have no issues.
 
@@ -48,9 +53,8 @@ flag all regressions in this branch
 
 It comes back fast - often within a minute, depending on the scope, of course. Anyhow, even in more complex changes it is significantly faster than the push-to-GitHub-wait-for-bot loop. And it's right there in my terminal, no tab-switching.
 
-Initially, I imagined I'd run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice.
+Then I fix things in that same session. It is already loaded with high quality context about the branch, so fixes are fast. I apply judgment - some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
-Then I fix things in that same session. It already has rich context about the branch, so fixes are fast. I apply judgment - some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
 ## Why it works on non-refactoring PRs too
 
