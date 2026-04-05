@@ -4,20 +4,17 @@ published: false
 tags: claudecode, ai, codereview, devtools
 ---
 
-I stopped waiting for Greptile.
+I stopped waiting for Greptile and co.
 
-For a while my workflow was: push a branch, wait for the GitHub bot to chew on it, context-switch to something else, come back minutes later, scroll through findings. It worked, but it had this annoying latency tax - both wall-clock and mental.
+Instead I run a skill I call `regression-dog`. It is open source, simple (about 20 lines of markdown), and integrates right into my terminal/coding agent.
 
-Then I wrote a Claude Code skill called `regression-dog`. It's about 20 lines of markdown. No code, no server, no API keys. And it quietly became the thing I reach for on almost every PR.
+Initially, I imagined I'd use it to run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice. Here is everything you need to know.
 
 ## What it does
 
-It reads the diff of your branch (or last commit, or last N commits - you choose the scope) and lists every behavioral change it can find. Here's how a typical output look like
+It reads the diff of your branch (or last commit, or last N commits - you choose the scope) and lists every behavioral change it can find. A typical output looks like this:
 
 [screenshot goes here]
-
-
-Initially, I imagined I'd use it to run a few fast iterations locally and then still lean on the dedicated review bots for the real deep analysis. To my surprise, it's usually just as thorough as those bots, and sometimes better. It consistently catches things I'd expect only a careful human reviewer to notice. Here is why it works.
 
 ## Let's unpack the magic
 
