@@ -53,20 +53,6 @@ It comes back fast - often within a minute, depending on the scope, of course. A
 Then I fix things in that same session. It is already loaded with high quality context about the branch, so fixes are fast. I apply judgment - some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
 
-## Why it works on non-refactoring PRs too
-
-I originally built this for pure refactors where zero behavioral changes are expected. A refactor regression-dog is straightforward: any behavioral delta is a bug.
-
-But then I started running it on feature branches, bug fixes, everything. Turns out "enumerate what changed" is a useful frame even when changes are expected. It catches the *unintended* changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format - that kind of thing.
-
-The "don't judge" instruction is key here. When the skill tries to assess whether each change is good or bad, it gets confused on feature branches where most changes *are* good. But when it just lists deltas, it stays sharp - and the results are specific enough that scanning them takes seconds, not minutes.
-
-## What it doesn't do
-
-It doesn't flag code quality issues. Sometimes it will mention one in passing, but it's not looking for them and I think that's right. Mixing "you have a regression" with "you should rename this variable" would cloud the model's focus. Dedicated tools for dedicated jobs.
-
-It also doesn't replace tests. It reasons about code statically. It can catch things tests miss (subtle behavioral shifts in untested paths), and tests catch things it misses (runtime behavior, integration effects). They're complementary.
-
 ## The full skill
 
 Here's the entire prompt - this is all there is:
