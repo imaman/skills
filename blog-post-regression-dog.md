@@ -52,6 +52,8 @@ It comes back fast - often within a minute, depending on the scope, of course. A
 
 Then I fix things in that same session. It is already loaded with high quality context about the branch, so fixes are fast. I apply judgment - some "regressions" are intentional behavior changes, and I skip those. Then I open yet another clean session and run it again. Repeat until it comes back clean, or until every flagged item is something I'm deliberately changing.
 
+This works just as well on feature branches as on pure refactors. Turns out "enumerate what changed" is a useful frame even when changes are expected - it catches the unintended changes hiding next to the intentional ones. You meant to change the retry logic, but you also accidentally changed the error message format - that kind of thing.
+
 
 ## The full skill
 
