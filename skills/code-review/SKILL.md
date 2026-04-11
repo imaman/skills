@@ -27,6 +27,7 @@ Review technique:
    - contracts and invariants
    - coupling
    - cohesion
+   - abstraction completeness (entities whose usage sites repeat logic that could live inside the entity) 
    - CLAUDE.md compliance
    - security
    - naming
