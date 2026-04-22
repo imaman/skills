@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: review-dog
 description: Review code changes for bugs, style, best practices, and adherence to project conventions.
 ---
 
