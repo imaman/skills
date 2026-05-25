@@ -50,8 +50,21 @@ Quality bar:
 
 Output format:
 
-- List issues first, numbered, with severity (critical / warning / nit) and the relevant aspect.
+- List issues first, numbered. Each finding has three parts, in this order:
+  1. **Title line**: a tight one-liner (≤ ~12 words) naming the specific problem. Strong verbs, concrete nouns. Optimized for skim/prioritization — a reader should be able to tell from the title alone whether to dive in. Avoid generic titles like "logging issue" or "potential bug"; say what is wrong (e.g., "Logs full Shopify payload at info — hundreds of KB per request").
+  2. **Subtitle line** (italicized, immediately under the title): `severity · aspect — path/to/file.ts:line`. Severity is one of critical / warning / nit.
+  3. **Body**: the detailed explanation. Quote the offending code or point at specific identifiers; explain why it matters and what to do.
 - After the issues section, add a "Cleared" section listing aspects that were reviewed and found to have no issues. Prefix each cleared item with a checkmark emoji.
+
+Example of a single finding:
+
+```
+1. Logs full shopifyContext at info — emits hundreds of KB per request
+   _warning · log hygiene — generate-segments-endpoint.ts:194_
+
+   `ret` carries up to 50 product objects plus 50 collection objects with
+   merchant-authored rich-text descriptions... [rest of the detailed body]
+```
 
 Scope (pass as arguments):
 
