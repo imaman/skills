@@ -9,6 +9,7 @@ Important:
 
 - Do NOT run tests, typechecks, linters, or build commands. CI already handles those. Focus your context budget entirely on reasoning about the code changes.
 - Read CLAUDE.md and AGENTS.md before reviewing to ground your feedback in the project's actual rules.
+- NEVER flag commit messages or commit titles as issues. Commit message quality — whether a title is descriptive, conveys the change, will produce a good squash title, etc. — is out of scope. Review only the code changes themselves, never the prose of the commits that carry them.
 
 CLAUDE.md compliance:
 
