@@ -30,6 +30,11 @@ Output format:
 - Then a "Cleared" section: the aspects/areas the dogs reviewed and found clean, merged and deduped across both, each prefixed with ✅.
 - End with a single dropped-count line, e.g.: `Dropped 7 findings: 3 duplicates, 4 low-value. Ask to see them.` Do not list the dropped findings inline — but keep them in your ledger so you can spell them out on request.
 
+Explaining a finding:
+- Hand the request to the originating dog — it still has the diff and its reasoning loaded.
+- Ask it to prefer snippets (annotated where useful) over prose, when the finding pins to code.
+- Ask it to keep the writeup tight and direct.
+
 Scope (pass as arguments):
 - No arguments: review the most recent commit
 - `main`: review all commits since the last merge from main
