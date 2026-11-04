@@ -1,4 +1,7 @@
-# /pr-title
+---
+name: pr-title
+description: Come up with a PR title for all the changes in the current branch.
+---
 
 Come up with a PR title for all the changes in the current branch.
 

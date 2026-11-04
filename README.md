@@ -10,9 +10,37 @@ Browse the [`skills/`](skills/) directory to see what's available.
 
 ## Install
 
+Use either the skills installer or the marketplace configuration.
+
+### npx
+
 ```bash
 npx skills add https://github.com/imaman/skills --skill regression-dog
 ```
+
+### Marketplace
+
+Add this to `~/.copilot/settings.json` for GitHub Copilot CLI or `~/.claude/settings.json` for Claude Code:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "imaman-skills": {
+      "source": {
+        "source": "github",
+        "repo": "imaman/skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "imaman-skills@imaman-skills": true
+  }
+}
+```
+
+### Prerequisites
+
+`pr-title` requires `dcc diff`, `git`, `grep`, and `head` on your PATH.
 
 ## License
 

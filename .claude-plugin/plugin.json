@@ -1,0 +1,13 @@
+{
+  "name": "imaman-skills",
+  "version": "1.0.0",
+  "description": "Skills for code reviews, JSDoc, and PR titles.",
+  "author": {
+    "name": "imaman",
+    "url": "https://github.com/imaman"
+  },
+  "homepage": "https://github.com/imaman/skills",
+  "repository": "https://github.com/imaman/skills",
+  "license": "MIT",
+  "skills": "./skills"
+}
