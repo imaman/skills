@@ -1,0 +1,19 @@
+{
+  "name": "imaman-skills",
+  "owner": {
+    "name": "imaman",
+    "url": "https://github.com/imaman"
+  },
+  "metadata": {
+    "description": "Skills for code reviews, JSDoc, and PR titles."
+  },
+  "plugins": [
+    {
+      "name": "imaman-skills",
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/imaman/skills",
+      "description": "Skills for code reviews, JSDoc, and PR titles."
+    }
+  ]
+}
